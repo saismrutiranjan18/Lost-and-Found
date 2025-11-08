@@ -9,7 +9,7 @@ import Signin from './pages/Signin.jsx';
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className='h-full flex justify-center items-center flex-col'>
         <Navbar />
         <Routes>
           <Route path="/home" element={<Home />} />
