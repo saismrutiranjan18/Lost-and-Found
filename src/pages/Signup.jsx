@@ -15,12 +15,14 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
       [e.target.id]: e.target.value,
     }));
+    setSubmitError("");
   };
 
   const validate = () => {
@@ -42,14 +44,39 @@ const Signup = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const storeUser = () => {
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const found = users.find(
+      user => 
+        user.username === formData.username ||
+        user.email === formData.email
+    );
+    if (found) {
+      setSubmitError("Username or Email already exists.");
+      return false;
+    }
+    users.push({
+      username: formData.username,
+      password: formData.password,
+      email: formData.email,
+      phone: formData.phone,
+      campus: formData.campus,
+      dept: formData.dept,
+      id: formData.id,
+    });
+    localStorage.setItem("users", JSON.stringify(users));
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!validate()) return;
-
+    if (!storeUser()) return;
+    
     // TODO: Submit form data to backend here if needed
-
     // On success navigate to signin page
+    //UPDATE: Storing user data in localStorage for simplicity for now.
     navigate('/signin');
   };
 
@@ -82,6 +109,7 @@ const Signup = () => {
             {errors[id] && <p className="text-red-500 text-sm">{errors[id]}</p>}
           </label>
         ))}
+        {submitError && <p className='text-red-600 text-center'>{submitError}</p>}
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700 transition duration-200"

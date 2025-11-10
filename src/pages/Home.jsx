@@ -5,7 +5,7 @@ import '../styles/Home.css';
 
 const Home = () => {
   return (
-    <div className="home-container min-h-screen flex flex-col justify-center items-center text-center bg-gray-100 pt-20">
+    <div className="home-container w-full min-h-screen flex flex-col justify-center items-center text-center bg-gray-100 pt-20">
       <div className="hero-content animate-fadeIn">
         <h1 className="text-5xl font-extrabold text-gray-800 mb-4">
           Welcome to Campus Lost & Found

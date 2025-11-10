@@ -5,25 +5,50 @@ const Signin = () => {
   const navigate = useNavigate();
   const [identifier, setIdentifier] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState("");
 
-  const handleIdentifierChange = (e) => setIdentifier(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleIdentifierChange = (e) => {
+    setIdentifier(e.target.value);
+    setError("");
+  };
+  const handlePasswordChange = (e) => { 
+    setPassword(e.target.value);
+    setError(""); 
+  };
 
   const validateForm = () => {
     if (!identifier.trim() || !password.trim()) {
-      alert("Please fill in all fields.");
+      setError("Please fill in all fields.");
       return false;
     }
     return true;
   };
 
+  const authenticate = () => {
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const found = users.find(
+      user => 
+      (user.username === identifier || user.email === identifier) && 
+      user.password === password
+    );
+    if (!found) {
+      setError("Invalid username/email or password.");
+      return false;
+    }
+    return true;
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validateForm()) return;
+    if (!authenticate()) return;
 
     // TODO: Add authentication logic here
     // For now, navigate to /home if validation passes
+
+    //UPDATE: Authentication added but I have created the authentication function 
+    // to check user credentials against stored users in localStorage
+    // Not storing any session info for simplicity
     navigate("/home");
   };
 
@@ -59,6 +84,7 @@ const Signin = () => {
             required
           />
         </label>
+        {error && <p className="text-red-600 text-center">{error}</p>}
         <button
           type="submit"
           className="w-full bg-indigo-600 text-white p-2 rounded hover:bg-indigo-700 transition duration-200"
