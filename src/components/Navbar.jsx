@@ -27,11 +27,8 @@ const Navbar = () => {
           <Link to="/found-items" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-200">
             Found Items
           </Link>
-          <Link to="/report-lost" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-300">
-            Report Lost
-          </Link>
-          <Link to="/report-found" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-400">
-            Report Found
+          <Link to="/report-item" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-300">
+            Report Item
           </Link>
           <Link to="/contact" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-500">
             Contact
