@@ -33,6 +33,9 @@ const Navbar = () => {
           <Link to="/report-found" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-400">
             Report Found
           </Link>
+          <Link to="/contact" className="nav-link hover:text-blue-300 transition animate-slideInRight delay-500">
+            Contact
+          </Link>
         </div>
       </div>
     </nav>

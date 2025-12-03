@@ -5,6 +5,7 @@ import Navbar from './components/Navbar.jsx';
 import Home from './pages/Home.jsx';
 import Signup from './pages/Signup.jsx';
 import Signin from './pages/Signin.jsx';
+import ContactPage from './pages/Contact.jsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           {/* Add other routes as needed, e.g., <Route path="/report-lost" element={<ReportLost />} /> */}
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </div>
     </BrowserRouter>
